@@ -5,7 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 
 public class TextBoxTest {
 
@@ -25,12 +26,7 @@ public class TextBoxTest {
         $("#permanentAddress").setValue("Other address 2");
         $("#submit").click();
 
-        $("#output").shouldHave(
-                text("Alex"),
-                text("alex@company.com"),
-                text("Some address 1"),
-                text("Other address 2")
-        );
+        $("#output").shouldHave(text("Alex"), text("alex@company.com"), text("Some address 1"), text("Other address 2"));
 
 //        $("#currentAddress").shouldHave(text("Some address 1")); // WRONG!
         $("#currentAddress", 1).shouldHave(text("Some address 1"));
