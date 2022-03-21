@@ -9,14 +9,14 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
-public class PracticeFormWithTestBaseTest extends TestBase {
+public class PracticeFormWithTestDataTest extends TestBase {
 
     @Test
     void successTest() {
         open("/automation-practice-form");
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form"));
-        $("#firstName").setValue("Alex");
-        $("#lastName").setValue("Egorov");
+        $("#firstName").setValue(TestData.firstName);
+        $("#lastName").setValue(TestData.lastName);
         $("#userEmail").setValue("alex@egorov.com");
 
 //        $("#gender-radio-1").click(); // wrong
@@ -48,7 +48,7 @@ public class PracticeFormWithTestBaseTest extends TestBase {
         $("#submit").click();
         $(".modal-content").shouldHave(text("Thanks for submitting the form"));
 
-        $(".table-responsive").$(byText("Student Name")).parent().shouldHave(text("Alex Egorov"));
+        $(".table-responsive").$(byText("Student Name")).parent().shouldHave(text(TestData.firstName + " " + TestData.lastName));
         $(".table-responsive").$(byText("Student Email")).parent().shouldHave(text("alex@egorov.com"));
         $(".table-responsive").$(byText("Gender")).parent().shouldHave(text("Male"));
         $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text("1231231230"));
